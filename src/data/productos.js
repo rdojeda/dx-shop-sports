@@ -104,8 +104,4 @@ export const productos = [
 ];
  
 
-export const obtenerProductos = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(productos);
-  }, 3500);
-});
+

@@ -12,7 +12,7 @@ export const Item = ({id, title, pictureUrl, price}) => {
              </div>
              <hr></hr>
              <div className="card-footer">
-               <Link to={`/ItemDetail/${id}`} className="btn bt-primary">
+               <Link to={`/items/${id}`} className="btn bt-primary">
                  <button className="btn btn-primary">Ir al Carrito</button>
                </Link>
              </div>

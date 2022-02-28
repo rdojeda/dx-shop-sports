@@ -1,13 +1,10 @@
 import './App.css';
 import { NavBar } from './components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ItemDetail } from './components/ItemDetail';
-import { HomePage } from './pages/HomePage';
-import { ZapatillasPage } from './pages/ZapatillasPage';
-import { RemerasPage } from './pages/RemerasPage';
-import { CamperasPage } from './pages/CamperasPage';
+import { ItemListContainer } from './components/ItemListContainer';
+import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { NotFoundPage } from './pages/NotFoundPage';
-
+import { HomePage } from './pages/HomePage';
 
 export default function App() {
   return (
@@ -16,10 +13,8 @@ export default function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/zapatillas" element={<ZapatillasPage />} />
-          <Route path="/remeras" element={<RemerasPage />} />
-          <Route path="/camperas" element={<CamperasPage />} />
-          <Route path="/ItemDetail/:id" element={<ItemDetail />}/>
+          <Route path="/category/:category" element={<ItemListContainer />} />
+          <Route path="/item/:id" element={<ItemDetailContainer />}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
