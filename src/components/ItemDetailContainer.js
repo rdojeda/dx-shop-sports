@@ -23,7 +23,7 @@ export const ItemDetailContainer = () => {
         return elem.id === parseInt(id);
       })
       setDetail(getItemId)
-
+      setIsLoading(false)
     })
 
 

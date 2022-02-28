@@ -1,9 +1,7 @@
 import { ItemCount } from "./ItemCount";
-import { useParams } from "react-router-dom";
-import { productos } from "../data/productos";
 
 export const ItemDetail = ({title, pictureUrl,description,price, stock, category }) => {
-  let { id } = useParams();
+ 
 
   return (
     <>
