@@ -1,43 +1,30 @@
-import { useState } from "react";
 
-export const ItemCount = ({ stock, initial }) => {
-  const [count, setCount] = useState(0);
-
-  const handleAdd = () => {
-     if(count < stock) { setCount(count + 1) }
-    
-  };
-
-  function handleSubstract() {
-      if (count > initial) {setCount(count -1) }
-  }
+export const ItemCount = ({ count, add, sub, condition, stock  }) => {
 
   return (
     <>
-      <div className="container mt-5 mb-5">
-        <h5 className="text-center">
-          Stock {stock} - Clicks {count}
-        </h5>
-        <div className="d-grid gap-2 d-md-flex justify-content-md-center">
+          
+      <div className="row mt-5">
+        <div className="col d-flex justify-content-center">
           <button
-            className="btn btn-primary me-md-2"
+            className="btn btn-danger"
             type="button"
-            onClick={handleSubstract}
-          >
-            -
-          </button>
+            onClick={sub}
+            disabled={condition || count === 0}
+          > - </button>
+        </div>
+        <div className="col d-flex justify-content-center">
+          <h3> {count} </h3>
+
+        </div>
+        <div className="col d-flex justify-content-center">
           <button
             className="btn btn-success"
             type="button"
-            onClick={handleAdd}
-          >
-            +
-          </button>
-        </div>
-        <div className="-grid gap-2 d-md-flex justify-content-md-center mt-2">
-          <button className="btn btn-primary" type="button">
-            Agregar al Carrito
-          </button>
+            onClick={add}
+            disabled={condition || count >= stock}
+          
+          > + </button>
         </div>
       </div>
     </>
