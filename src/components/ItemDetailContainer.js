@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import { productos } from "../data/productos";
 import { ItemCount } from "./ItemCount";
 import { ShowCounter } from "./ShowCounter";
+import { CartShoppingWidget } from "./CartShoppingWidget";
+import { useCartContext } from "../Context/Context";
 
 export const ItemDetailContainer = () => {
   
-  const [detail, setDetail] = useState();
+  const [detail, setDetail] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0)
-  const [show, setShow] = useState(false);
+
+  const { addItem, show, handleShow } = useCartContext()
   
-  const handleShow = () => setShow((prev) => !prev);
   const { id } = useParams();
 
   const handleAdd = () => {
@@ -31,7 +33,8 @@ export const ItemDetailContainer = () => {
   })
 
   useEffect(() => {
-   
+    if (show) handleShow();
+
     getItemDetail.then((data) => {
       let getItemId = data.find((elem) => {
         return elem.id === parseInt(id);
@@ -53,9 +56,7 @@ export const ItemDetailContainer = () => {
               <div className="row justify-content-center mt-5">
                   <ItemDetail {...detail} />
 
-               
-
-                <div className=" d-flex mt-2 mb-5 justify-content-center">
+                  <div className=" d-flex mt-2 mb-5 justify-content-center">
                      <ItemCount
                     count={count}
                     sub={handleSub}
@@ -64,18 +65,19 @@ export const ItemDetailContainer = () => {
                     condition={show}
                     stock={detail.stock}
                   />
+                  <CartShoppingWidget count={count}/>
                 </div>  
                   
                   <button
                     className="btn btn-primary w-25 mb-5"
                     type="button"
-                    onClick={handleShow}
+                  onClick={()=> addItem(detail, count)}
                     disabled={show || count === 0}
                   >
-                    Agregar al Carrito
+                    Agregar Producto
                   </button>
                   {show && <ShowCounter show={handleShow} count={count} />}
-                  {/* pensar un ternario para ocultar o mostrar  */}
+                
                   </div>
               </div>
           

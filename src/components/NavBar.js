@@ -1,10 +1,15 @@
+import React, {useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import "../App.css";
 
 import { CartWidget } from './CartWidget';
+import { CartShoppingWidget } from './CartShoppingWidget';
+import { CartContext } from '../Context/Context';
 
 export const NavBar = () => {
-    return (
+  const { cartCount } = useContext(CartContext)
+
+  return (
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
@@ -48,7 +53,13 @@ export const NavBar = () => {
                     Camperas
                   </NavLink>
                 </li>
-              
+              </ul>
+              <ul className="d-flex">
+                <li className="nav-item me-2">
+                  <NavLink className="nav-link" to="/cart">
+                  <CartShoppingWidget /><span className="text-white h4 m-2">{cartCount}</span>
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>
