@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
       );
       copy[repeatItemIndex] = {
         ...copy[repeatItemIndex],
-        amount: copy[repeatItemIndex].quantity + quantity,
+        quantity: copy[repeatItemIndex].quantity + quantity,
       };
 
       setCartItems(copy);
