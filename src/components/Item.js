@@ -13,7 +13,7 @@ export const Item = ({id, title, pictureUrl, price}) => {
              <hr></hr>
              <div className="card-footer">
                <Link to={`/items/${id}`} className="btn bt-primary">
-                 <button className="btn btn-primary">Ir al Carrito</button>
+                 <button className="btn btn-primary">Comprar</button>
                </Link>
              </div>
            </div>

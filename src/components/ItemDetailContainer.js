@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { productos } from "../data/productos";
 import { ItemCount } from "./ItemCount";
 import { ShowCounter } from "./ShowCounter";
-import { CartShoppingWidget } from "./CartShoppingWidget";
 import { useCartContext } from "../Context/Context";
 
 export const ItemDetailContainer = () => {
@@ -65,7 +64,7 @@ export const ItemDetailContainer = () => {
                     condition={show}
                     stock={detail.stock}
                   />
-                  <CartShoppingWidget count={count}/>
+                 
                 </div>  
                   
                   <button

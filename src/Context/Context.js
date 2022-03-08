@@ -32,12 +32,20 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  /*  const deleteItem = (item) =>
-    cartItems.filter((product) => product.id !== item.id); //función incompleta */
+  const deleteItem = (id) => {
+    let res = cartItems.filter((e) => e.id !== id);
+    setCartItems(res);
+  };
+
+  const clearAll = () => {
+    setCartItems([]);
+  };
+
+  
 
   return (
     <CartContext.Provider
-      value={{ cartCount, cartItems, addItem, show, handleShow }}
+      value={{ cartCount, cartItems, addItem, show, handleShow, deleteItem, clearAll }}
     >
       {children}
     </CartContext.Provider>
