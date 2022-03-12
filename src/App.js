@@ -7,6 +7,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { HomePage } from './pages/HomePage';
 import { Cart } from './components/Cart';
 import { CartProvider } from './Context/Context';
+//import { PruebaFirebase } from './components/PruebaFirebase';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/items/:id" element={<ItemDetailContainer />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFoundPage />} />
+           
           </Routes>
         </BrowserRouter>
       </CartProvider>

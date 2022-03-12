@@ -1,37 +1,47 @@
 import { ItemList } from "./ItemList";
 import { useEffect, useState } from 'react';
-import { productos } from "../data/productos";
 import { useParams } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../utils/firebase';
+
 
 export const ItemListContainer = () => {
     const[items, setItems] = useState([]);
     const[isLoading, setIsLoading] = useState(true);
     
-    let params = useParams();
+  let {category} = useParams();
      
-  const getProductos = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(productos)
-    },2000)
-  })
-      
- useEffect(() => {
-   getProductos.then((data) => {
-     if (params.category === undefined) {
-       setItems(data)
-       setIsLoading(false)
-     } else {
-       
-       let filtro = data.filter((elem) => elem.category === params.category);
-       setItems(filtro);
-       setIsLoading(false);
-     }
-     
-   })
-     .catch(error => { console.log('Error', error) })
-           
-  }, [items]);
-    
+    const getData = async () => {
+      try {
+        const itemsCollection = collection(db, "bdProductos")
+        const col = await getDocs(itemsCollection)
+        const result = col.docs.map((doc)=> doc = {id:doc.id, ...doc.data()})
+        setItems(result)
+        setIsLoading(false)
+      } catch(error) {
+        console.log('Error', error);
+      }
+  }
+  
+  const getDataCategory = async () => {
+    try {
+      const itemsCollection = collection(db, "bdProductos")
+      const col = await getDocs(itemsCollection)
+      const result = col.docs.map((doc) => doc = { id: doc.id, ...doc.data() })
+      setItems(result.filter(e => e.category === category))
+      setIsLoading(false)
+    } catch (error) {
+      console.log('Error', error)
+    }
+  }
+
+  useEffect(() => {
+    category?getDataCategory():getData()
+
+  },[category])
+  
+  console.log('items', items)
+
     return (
       <>
         {isLoading ? (

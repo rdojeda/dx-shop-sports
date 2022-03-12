@@ -53,6 +53,7 @@ export const NavBar = () => {
                   Camperas
                 </NavLink>
               </li>
+            
             </ul>
             <ul className="d-flex">
               <li className="nav-item me-2">
@@ -61,6 +62,7 @@ export const NavBar = () => {
                   
                 </NavLink>
               </li>
+
             </ul>
           </div>
         </div>

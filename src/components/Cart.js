@@ -28,6 +28,7 @@ export const Cart = () => {
                     >
                       Eliminar Producto
                     </button>
+                    <Link to='/'>Seguir Comprando</Link>
                   </div>
                 </div>
               </div>
