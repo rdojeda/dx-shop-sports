@@ -1,14 +1,10 @@
-import React, {useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import "../App.css";
 
 import { CartWidget } from './CartWidget';
 
-import { CartContext } from '../Context/Context';
-
 export const NavBar = () => {
-  const { cartCount } = useContext(CartContext)
-
+ 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
