@@ -13,7 +13,7 @@ DX Shop Sports es un proyecto de e-commerce diseñado y desarrollado para el Pro
 * [CSS3]("https://www.w3.org/TR/2001/WD-css3-roadmap-20010523/")
 * [React]("https://es.reactjs.org/")
 * [Riot - Radical Image Optimization tool]("https://riot-optimizer.com/")
-
+* [Sweetalter2]("https://sweetalert2.github.io/")
 ## Instalación  
 
 Podés clonar el repositorio 
