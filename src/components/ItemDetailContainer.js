@@ -3,6 +3,7 @@ import { db } from "../utils/firebase";
 import { useParams } from "react-router-dom";
 import { ItemDetail } from './ItemDetail';
 import { useEffect, useState } from "react";
+import { Spinner } from './Spinner';
 
 export const ItemDetailContainer = () => {
   
@@ -32,7 +33,7 @@ export const ItemDetailContainer = () => {
   return (
     <>
       {isLoading ? (
-        <h1 className="text-center mt-2">Cargando....</h1>
+          <Spinner />
       ) : (
         <>
           <div className="container mt-5">

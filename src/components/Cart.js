@@ -1,11 +1,12 @@
 import { useCartContext } from "../Context/Context";
 import { Link } from 'react-router-dom';
 import { collection, Timestamp, addDoc } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { db, updateStock } from "../utils/firebase";
+import Swal from "sweetalert2";
 
 export const Cart = () => {
   const { cartItems, clearAll, deleteItem } = useCartContext()
-  
+ 
   const sendOrder = async (e) => {
     e.preventDefault();
     let order = {
@@ -22,14 +23,27 @@ export const Cart = () => {
     console.log("order", order);
     try {
       const docRef = await addDoc(queryCollection, order);
-      console.log('docRef', docRef.id);
+      console.log(docRef.id)
+      //Actualizar Stock
+      cartItems.forEach((item) => updateStock(item.id, item.quantity))
+      //Limpiar Carrito
       clearAll()
-      order.buyer.name = e.target.reset() 
-      order.buyer.phone = e.target.reset(); 
-      order.buyer.email = e.target.reset(); 
+      //Limpiar formulario
+      order.buyer.name = e.target.reset()
+      order.buyer.phone = e.target.reset();
+      order.buyer.email = e.target.reset();
+      //Alerta pra mostrar nro. de orden de compra
+      Swal.fire({
+        title: "Su pedido fue realizado con éxito!",
+        text: `Su compra se registro con el número: ${docRef.id}`,
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      });
+
 
     } catch (error) {
       console.log("Error", error);
+      Swal.fire(`Hubo un Error!`, "Inténtalo nuevamente", "error")
     }
   };
      
@@ -50,7 +64,11 @@ export const Cart = () => {
                 <div className="card mb-5 p-2">
                   <div className="row">
                     <div className="col-md-4">
-                      <img src={i.pictureUrl} alt={i.title} className="img-fluid" />
+                      <img
+                        src={i.pictureUrl}
+                        alt={i.title}
+                        className="img-fluid"
+                      />
                     </div>
                     <div className="col-md-8">
                       <h2 className="card-title mt-3">{i.title}</h2>
@@ -64,7 +82,6 @@ export const Cart = () => {
                       >
                         Eliminar Producto
                       </button>
-                   
                     </div>
                   </div>
                 </div>
@@ -78,6 +95,9 @@ export const Cart = () => {
         <button className="btn btn-danger" onClick={clearAll}>
           Vaciar Carrito
         </button>
+        <Link className="btn btn-primary mx-3" to="/">
+          Seguir Comprando 
+        </Link>
       </div>
 
       <div className="container mb-5">
@@ -102,7 +122,9 @@ export const Cart = () => {
               </div>
             </div>
             <form className="w-50 mx-auto mt-5" onSubmit={sendOrder}>
-              <legend className="mb-5">Completar con tus datos para finalizar la compra</legend>
+              <legend className="mb-5">
+                Completar con tus datos para finalizar la compra
+              </legend>
               <div className="mb-3 mt-5">
                 <label htmlFor="name" className="form-label">
                   Nombre

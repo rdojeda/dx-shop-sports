@@ -1,8 +1,9 @@
 import { ItemList } from "./ItemList";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../utils/firebase';
+import { db } from "../utils/firebase";
+import { Spinner } from "./Spinner";
 
 
 export const ItemListContainer = () => {
@@ -45,7 +46,7 @@ export const ItemListContainer = () => {
     return (
       <>
         {isLoading ? (
-          <h1 className="text-center mt-2">Cargando....</h1>
+            <Spinner />
         ) : (
           <>
            
