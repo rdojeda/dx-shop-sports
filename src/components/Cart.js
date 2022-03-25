@@ -60,8 +60,8 @@ export const Cart = () => {
         <div className="container mt-5">
           {cartItems.map((i) => {
             return (
-              <>
-                <div className="card mb-5 p-2">
+              
+                <div className="card mb-5 p-2" key={i.id}>
                   <div className="row">
                     <div className="col-md-4">
                       <img
@@ -85,7 +85,7 @@ export const Cart = () => {
                     </div>
                   </div>
                 </div>
-              </>
+              
             );
           })}
         </div>

@@ -12,31 +12,33 @@ export const ItemListContainer = () => {
     
   let {category} = useParams();
      
-    const getData = async () => {
+ 
+
+  useEffect(() => {
+  const getData = async () => {
+        try {
+          const itemsCollection = collection(db, "bdProductos")
+          const col = await getDocs(itemsCollection)
+          const result = col.docs.map((doc)=> doc = {id:doc.id, ...doc.data()})
+          setItems(result)
+          setIsLoading(false)
+        } catch(error) {
+          console.log('Error', error);
+        }
+    }
+    
+    const getDataCategory = async () => {
       try {
         const itemsCollection = collection(db, "bdProductos")
         const col = await getDocs(itemsCollection)
-        const result = col.docs.map((doc)=> doc = {id:doc.id, ...doc.data()})
-        setItems(result)
+        const result = col.docs.map((doc) => doc = { id: doc.id, ...doc.data() })
+        setItems(result.filter(e => e.category === category))
         setIsLoading(false)
-      } catch(error) {
-        console.log('Error', error);
+      } catch (error) {
+        console.log('Error', error)
       }
-  }
-  
-  const getDataCategory = async () => {
-    try {
-      const itemsCollection = collection(db, "bdProductos")
-      const col = await getDocs(itemsCollection)
-      const result = col.docs.map((doc) => doc = { id: doc.id, ...doc.data() })
-      setItems(result.filter(e => e.category === category))
-      setIsLoading(false)
-    } catch (error) {
-      console.log('Error', error)
     }
-  }
 
-  useEffect(() => {
     category?getDataCategory():getData()
 
   },[category])
